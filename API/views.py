@@ -8,6 +8,6 @@ class QuoteList(generics.ListCreateAPIView):
     queryset= Quote.objects.all()
     serializer_class= QuoteSerializer
 
-class Quote_ret_updt_dest(generics.RetrieveUpdateDestroyAPIView):
+class Quote_retrieve_update_destroy(generics.RetrieveUpdateDestroyAPIView):
     queryset= Quote.objects.all()
     serializer_class= QuoteSerializer
