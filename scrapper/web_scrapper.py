@@ -116,10 +116,3 @@ def scrap_quotes(category,quantity):
         print('No Quote Found')
 
 
-rec_d = scrap_quotes('inspiration',10)
-countr= 1
-for key,value in rec_d.items():
-    print('===========================')
-    print(f"{countr}. {key}")
-    print('-',value)
-    countr+= 1
