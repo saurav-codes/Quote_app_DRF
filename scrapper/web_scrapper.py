@@ -62,8 +62,7 @@ def get_cloud_quotes_quantity(category):
     else:
         return 0,soup
 
-def scrap_single_page_data(soup,quantity): 
-    global all_quotes 
+def scrap_single_page_data(soup,quantity,total_quotes_to_scrap):  
     countr= 1
     all_quotes_div= soup.findAll('div',class_='quoteText')
     for quote_div in all_quotes_div:
@@ -75,7 +74,9 @@ def scrap_single_page_data(soup,quantity):
         if countr == quantity:
             break 
         countr += 1 
-        # print(f"Processing.... {}")
+        process_unformatted= (len(all_quotes)/total_quotes_to_scrap)*100
+        process_round_off= round(process_unformatted,2)        
+        print(f"Processing....{process_round_off}%")
 
 def scrap_multi_page_data(no_of_pages, category, quantity):
     global all_quotes
@@ -83,10 +84,10 @@ def scrap_multi_page_data(no_of_pages, category, quantity):
         for page_no in range(1, no_of_pages+1): 
             soup= makeSoup(f'https://www.goodreads.com/quotes/tag/{category}?page={page_no}&utf8=%E2%9C%93')
             if page_no != no_of_pages: 
-                scrap_single_page_data(soup,30)  
+                scrap_single_page_data(soup,30,quantity)  
             else:
                 last_page_quantity= quantity % 30 
-                scrap_single_page_data(soup,last_page_quantity)  
+                scrap_single_page_data(soup,last_page_quantity,quantity)  
 
 
 def get_quotes(category,quantity):
@@ -100,7 +101,7 @@ def get_quotes(category,quantity):
         print(f"Sorry, we can't find that much quantity of results\nwe only have {cloud_quotes_quantity} results.")
     else:
         if quantity <= 30: 
-            scrap_single_page_data(soup,quantity) 
+            scrap_single_page_data(soup,quantity,quantity) 
         elif quantity > 30:
             res= quantity 
             no_of_pages= ceil(res / 30) 
@@ -115,7 +116,7 @@ def scrap_quotes(category,quantity):
         print('No Quote Found')
 
 
-rec_d = scrap_quotes('inspiration',500)
+rec_d = scrap_quotes('inspiration',10)
 countr= 1
 for key,value in rec_d.items():
     print('===========================')
