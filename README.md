@@ -2,7 +2,7 @@
 This is a simple Rest API which can be used to fetch a quote with id or a list of quote. we can also do CRUD operation on the Quote. Also this app uses Beautiful Soup to scrap data from a Quote website &amp; save the data to the DataBase by using provided commands.
 
 ## After running local django server, headover to this url ##
-http://127.0.0.1:8000/api/quotes
+<img style='width:35px' src='https://img-premium.flaticon.com/png/128/1674/premium/1674715.png?token=exp=1630814376~hmac=8052cfe95753455bd36934f55928a221' />               http://127.0.0.1:8000/api/quotes
 
 ## Here are the end-points to send request ##
 - `GET /quote/<pk> - Get the quote based on the primary key `
